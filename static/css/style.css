@@ -1,0 +1,63 @@
+body {
+    background-color: #f4f6f8;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+.navbar {
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.navbar-brand {
+    font-weight: 700;
+    font-size: 1.5rem;
+    color: #007bff !important;
+}
+
+.nav-link {
+    font-size: 1rem;
+    color: #555 !important;
+    transition: color 0.3s ease;
+}
+
+.nav-link:hover {
+    color: #007bff !important;
+}
+
+.container {
+    background-color: #fff;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    margin-top: 2rem;
+}
+
+.alert {
+    font-size: 1rem;
+    border-radius: 6px;
+}
+
+.btn {
+    border-radius: 6px;
+    font-weight: 600;
+}
+
+h2 {
+    font-weight: 700;
+    color: #222;
+    margin-bottom: 1.5rem;
+}
+.card {
+    border-radius: 12px;
+}
+.badge {
+    font-size: 0.95em;
+}
+.table th, .table td {
+    vertical-align: middle;
+}
+h2, h5 {
+    font-weight: 700;
+}

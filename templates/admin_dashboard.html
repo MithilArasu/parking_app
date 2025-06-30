@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="row mb-4">
+    <div class="col-12 d-flex justify-content-between align-items-center">
+        <h2 class="mb-0"><i class="bi bi-speedometer2 me-2"></i>Admin Dashboard</h2>
+        <a href="{{ url_for('admin.create_lot') }}" class="btn btn-primary">
+            <i class="bi bi-plus-lg"></i> Create Parking Lot
+        </a>
+    </div>
+</div>
+
+<div class="row g-4">
+    <div class="col-md-7">
+        <div class="card shadow-sm border-0">
+            <div class="card-body">
+                <h5 class="card-title mb-3"><i class="bi bi-building me-2"></i>Parking Lots</h5>
+                <div class="table-responsive">
+                    <table class="table table-hover align-middle">
+                        <thead class="table-light">
+                            <tr>
+                                <th>Name</th>
+                                <th>Price</th>
+                                <th>Address</th>
+                                <th>Pin</th>
+                                <th>Spots</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for lot in lots %}
+                            <tr>
+                                <td><span class="fw-bold">{{ lot.prime_location_name }}</span></td>
+                                <td>₹{{ lot.price }}</td>
+                                <td>{{ lot.address }}</td>
+                                <td>{{ lot.pin_code }}</td>
+                                <td>
+                                    <span class="badge bg-primary mb-1">Total: {{ lot.maximum_number_of_spots }}</span><br>
+                                    <span class="badge bg-success mb-1">Available: {{ lot.spots|selectattr('status', 'equalto', 'A')|list|length }}</span><br>
+                                    <span class="badge bg-danger">Occupied: {{ lot.spots|selectattr('status', 'equalto', 'O')|list|length }}</span>
+                                </td>
+                                <td>
+                                    <a href="{{ url_for('admin.edit_lot', lot_id=lot.id) }}" class="btn btn-sm btn-warning mb-1">
+                                        <i class="bi bi-pencil-square"></i> Edit
+                                    </a>
+                                    <form method="POST" action="{{ url_for('admin.delete_lot', lot_id=lot.id) }}" style="display:inline;">
+                                        <button class="btn btn-sm btn-danger" onclick="return confirm('Delete this lot?')">
+                                            <i class="bi bi-trash"></i> Delete
+                                        </button>
+                                    </form>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-5">
+        <div class="card shadow-sm border-0 h-100">
+            <div class="card-body">
+                <h5 class="card-title mb-3"><i class="bi bi-people me-2"></i>Registered Users</h5>
+                <ul class="list-group">
+                    {% for user in users %}
+                        <li class="list-group-item d-flex align-items-center">
+                            <i class="bi bi-person-circle me-2 text-primary"></i> {{ user.username }}
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
