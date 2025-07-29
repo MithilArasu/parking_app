@@ -49,15 +49,3 @@ h2 {
     color: #222;
     margin-bottom: 1.5rem;
 }
-.card {
-    border-radius: 12px;
-}
-.badge {
-    font-size: 0.95em;
-}
-.table th, .table td {
-    vertical-align: middle;
-}
-h2, h5 {
-    font-weight: 700;
-}

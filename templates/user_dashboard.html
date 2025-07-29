@@ -15,13 +15,17 @@
             <td>₹{{ lot.price }}</td>
             <td>{{ lot.address }}</td>
             <td>{{ lot.pin_code }}</td>
-            <td>{{ lot.spots|selectattr('status', 'equalto', 'A')|list|length }}</td>
             <td>
-                {% if lot.spots|selectattr('status', 'equalto', 'A')|list|length > 0 %}
-                <a href="{{ url_for('user.reserve', lot_id=lot.id) }}" class="btn btn-sm btn-primary">Reserve</a>
+                {{ lot.maximum_number_of_spots }}
+            </td>
+            <td>
+                {% set available_spots = parking_spots | selectattr('lot_id', 'equalto', lot.id) | selectattr('status', 'equalto', 'A') | list %}
+                {% if available_spots|length > 0 %}
+                    <a href="{{ url_for('user.reserve', lot_id=lot.id) }}" class="btn btn-sm btn-primary">Reserve</a>
                 {% else %}
-                <span class="text-danger">Full</span>
+                    <span class="text-danger">Full</span>
                 {% endif %}
+
             </td>
         </tr>
         {% endfor %}
@@ -37,8 +41,8 @@
     <tbody>
         {% for res in reservations %}
         <tr>
-            <td>{{ res.spot.lot.prime_location_name }}</td>
-            <td>{{ res.spot.id }}</td>
+            <td>{{ res.spot_id }}</td>
+            <td>{{ res.spot_id }}</td>
             <td>{{ res.parking_timestamp }}</td>
             <td>{{ res.leaving_timestamp or 'Active' }}</td>
             <td>{% if res.parking_cost %}₹{{ res.parking_cost }}{% else %}-{% endif %}</td>
@@ -56,4 +60,3 @@
     </tbody>
 </table>
 {% endblock %}
- n m
